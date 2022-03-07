@@ -2,12 +2,12 @@ package hibernate;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.transaction.Transactional;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
+@Transactional
 @Path("/produtos")
 public class ProdutoResource {
 
@@ -18,5 +18,12 @@ public class ProdutoResource {
     public List<Produto> getProdutos(){
 
         return entityManager.createQuery("select p from Produto p", Produto.class).getResultList();
+    }
+
+    @POST
+    @Produces(value= MediaType.APPLICATION_JSON)
+    @Consumes(value= MediaType.APPLICATION_JSON)
+    public void addProduto(Produto produto){
+        entityManager.persist(produto);
     }
 }
