@@ -1,4 +1,4 @@
-package hibernate;
+package jaeger;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

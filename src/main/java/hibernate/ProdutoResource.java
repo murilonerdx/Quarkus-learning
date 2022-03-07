@@ -11,19 +11,18 @@ import java.util.List;
 @Path("/produtos")
 public class ProdutoResource {
 
-    @Inject EntityManager entityManager;
+    @Inject ProdutoService produtoService;
 
     @GET
     @Produces(value= MediaType.APPLICATION_JSON)
     public List<Produto> getProdutos(){
-
-        return entityManager.createQuery("select p from Produto p", Produto.class).getResultList();
+        return produtoService.getProdutos();
     }
 
     @POST
     @Produces(value= MediaType.APPLICATION_JSON)
     @Consumes(value= MediaType.APPLICATION_JSON)
     public void addProduto(Produto produto){
-        entityManager.persist(produto);
+        produtoService.addProduto(produto);
     }
 }
